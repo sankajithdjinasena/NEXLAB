@@ -31,6 +31,27 @@ function require_login(): void
     }
 }
 
+/**
+ * Gates a page to one or more roles. Guests go to login; logged-in
+ * users with the wrong role get bounced to their own dashboard.
+ * $depth lets nested pages (e.g. admin/dashboard.php) correct the
+ * relative path back to login.php / dashboard.php.
+ */
+function require_role(array $roles, int $depth = 0): void
+{
+    $prefix = str_repeat('../', $depth);
+
+    if (!is_logged_in()) {
+        header('Location: ' . $prefix . 'login.php');
+        exit;
+    }
+    $user = current_user();
+    if (!in_array($user['role'], $roles, true)) {
+        header('Location: ' . $prefix . dashboard_for_role($user['role']));
+        exit;
+    }
+}
+
 /** Where each role lands after a successful login. */
 function dashboard_for_role(string $role): string
 {
