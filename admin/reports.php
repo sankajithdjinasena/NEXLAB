@@ -41,7 +41,7 @@ foreach ($peakHours as $row) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reports — SURAS Admin</title>
+<title>Reports — NEXLAB Admin</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 </head>

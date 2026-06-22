@@ -71,7 +71,7 @@ if ($selectedUserId && $activeStudent) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Support Desk — SURAS</title>
+<title>Support Desk — NEXLAB</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <style>
 .support-container { display: flex; gap: 0; height: 600px; max-height: 80vh; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px;}

@@ -2,7 +2,7 @@
 # 🗂 Project Structure
 
 ```
-SURAS/
+NEXLAB/
 │
 ├── index.php
 ├── login.php
@@ -35,7 +35,7 @@ SURAS/
 │   └── icons/
 │
 └── database/
-    └── suras.sql
+    └── NEXLAB.sql
 ```
 
 ---

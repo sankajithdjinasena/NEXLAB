@@ -49,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            . dirname($_SERVER['PHP_SELF']) . '/reset-password.php?token=' . $token;
 
                 $body = "Hi " . $user['full_name'] . ",\n\n"
-                      . "You requested a password reset for your SURAS account.\n\n"
+                      . "You requested a password reset for your NEXLAB account.\n\n"
                       . "Click the link below to set a new password (valid for 1 hour):\n"
                       . $resetLink . "\n\n"
                       . "If you did not request this, you can safely ignore this email.\n\n"
-                      . "— The SURAS Team";
+                      . "— The NEXLAB Team";
 
-                // send_email_notification($email, $user['full_name'], '[SURAS] Password Reset Request', $body);
-                $result = send_email_notification($email, $user['full_name'], '[SURAS] Password Reset Request', $body);
+                // send_email_notification($email, $user['full_name'], '[NEXLAB] Password Reset Request', $body);
+                $result = send_email_notification($email, $user['full_name'], '[NEXLAB] Password Reset Request', $body);
                 if (!$result) {
                     error_log("MAIL FAILED for: " . $email);
                 }
@@ -73,7 +73,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forgot Password — SURAS</title>
+<title>Forgot Password — NEXLAB</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -85,7 +85,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <a href="index.php" class="brand">
         <span class="brand-mark">S</span>
         <span>
-          <span class="brand-name">SURAS</span>
+          <span class="brand-name">NEXLAB</span>
           <span class="brand-sub">RESOURCE LEDGER</span>
         </span>
       </a>

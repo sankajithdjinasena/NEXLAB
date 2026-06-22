@@ -65,7 +65,7 @@ function seconds_to_label(int $s): string {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Settings — SURAS Admin</title>
+<title>Settings — NEXLAB Admin</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <style>
 .settings-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -192,7 +192,7 @@ function seconds_to_label(int $s): string {
               <div class="field-control">
                 <input type="text" id="notify_from_name" name="notify_from_name"
                        value="<?php echo e($s['notify_from_name'] ?? ''); ?>"
-                       placeholder="SURAS Resource System">
+                       placeholder="NEXLAB Resource System">
               </div>
             </div>
           </div>

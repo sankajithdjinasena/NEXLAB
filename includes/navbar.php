@@ -9,7 +9,7 @@
     <a href="index.php" class="brand">
       <span class="brand-mark">S</span>
       <span>
-        <span class="brand-name">SURAS</span>
+        <span class="brand-name">NEXLAB</span>
         <span class="brand-sub">RESOURCE LEDGER</span>
       </span>
     </a>

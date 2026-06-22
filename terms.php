@@ -1,6 +1,6 @@
 <?php
 /**
- * terms.php — SURAS Terms of Service
+ * terms.php — NEXLAB Terms of Service
  */
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
@@ -13,8 +13,8 @@ $last_updated = 'June 21, 2026';
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service — SURAS</title>
-<meta name="description" content="The terms that govern your use of SURAS.">
+<title>Terms of Service — NEXLAB</title>
+<meta name="description" content="The terms that govern your use of NEXLAB.">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -24,7 +24,7 @@ $last_updated = 'June 21, 2026';
     <a href="index.php" class="brand">
       <span class="brand-mark">S</span>
       <span>
-        <span class="brand-name">SURAS</span>
+        <span class="brand-name">NEXLAB</span>
         <span class="brand-sub">RESOURCE LEDGER</span>
       </span>
     </a>
@@ -66,7 +66,7 @@ $last_updated = 'June 21, 2026';
 
         <div class="panel" id="intro">
           <p style="margin:0;">
-            By using SURAS, you agree to the following terms for booking and managing university resources.
+            By using NEXLAB, you agree to the following terms for booking and managing university resources.
           </p>
         </div>
 
@@ -123,7 +123,7 @@ $last_updated = 'June 21, 2026';
         <div class="panel" id="liability">
           <div class="panel-head"><h2>6. Liability</h2></div>
           <p style="margin:0;">
-            SURAS is provided "as is" for academic purposes (CIPHER 2.0 — Team Predictra). We're not liable
+            NEXLAB is provided "as is" for academic purposes (CIPHER 2.0 — Team Predictra). We're not liable
             for losses from downtime, scheduling errors, or missed notifications.
           </p>
         </div>
@@ -132,7 +132,7 @@ $last_updated = 'June 21, 2026';
           <div class="panel-head"><h2>7. Contact</h2></div>
           <p style="margin:0;">
             Questions about these terms? Email
-            <a class="link-amber" href="mailto:support@suras.edu">support@suras.edu</a>.
+            <a class="link-amber" href="mailto:support@NEXLAB.edu">support@NEXLAB.edu</a>.
           </p>
         </div>
 
@@ -157,7 +157,7 @@ $last_updated = 'June 21, 2026';
 
 <footer class="site-footer">
   <div class="container footer-bottom">
-    <span>&copy; <?php echo date('Y'); ?> SURAS &mdash; Team Predictra</span>
+    <span>&copy; <?php echo date('Y'); ?> NEXLAB &mdash; Team Predictra</span>
     <span>
       <a href="privacy-policy.php" class="link-amber">Privacy Policy</a>
     </span>

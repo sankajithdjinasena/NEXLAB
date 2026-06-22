@@ -42,7 +42,7 @@ $filters = ['pending' => 'Pending', 'approved' => 'Approved', 'waitlist' => 'Wai
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Booking Requests — SURAS Admin</title>
+<title>Booking Requests — NEXLAB Admin</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>

@@ -1,6 +1,6 @@
 <?php
 /**
- * login.php — SURAS sign-in
+ * login.php — NEXLAB sign-in
  * Authenticates against the users table and routes by role.
  */
 require_once __DIR__ . '/includes/config.php';
@@ -48,7 +48,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign in — SURAS</title>
+<title>Sign in — NEXLAB</title>
 <meta name="description" content="Sign in to the Smart University Resource Allocation System to book labs, rooms, and equipment.">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -62,7 +62,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <a href="index.php" class="brand">
         <span class="brand-mark">S</span>
         <span>
-          <span class="brand-name">SURAS</span>
+          <span class="brand-name">NEXLAB</span>
           <span class="brand-sub">RESOURCE LEDGER</span>
         </span>
       </a>
@@ -157,7 +157,7 @@ $csrf_token = $_SESSION['csrf_token'];
         <button type="submit" class="btn btn-amber btn-block">Sign in</button>
       </form>
 
-      <div class="auth-divider">New to SURAS</div>
+      <div class="auth-divider">New to NEXLAB</div>
 
       <a href="register.php" class="btn btn-ghost btn-block" style="margin-bottom: 14px;">Create an account</a>
 

@@ -25,7 +25,7 @@ $justRegistered = isset($_GET['welcome']);
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard — SURAS</title>
+<title>Dashboard — NEXLAB</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/assistant.css">
 </head>
@@ -39,7 +39,7 @@ $justRegistered = isset($_GET['welcome']);
     <?php if ($justRegistered): ?>
       <div class="banner banner-success">
         <span>✓</span>
-        <span>Welcome to SURAS, <?php echo e($user['full_name']); ?> — your account is ready. Start by browsing resources below.</span>
+        <span>Welcome to NEXLAB, <?php echo e($user['full_name']); ?> — your account is ready. Start by browsing resources below.</span>
       </div>
     <?php endif; ?>
 

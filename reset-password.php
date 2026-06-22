@@ -75,7 +75,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reset Password — SURAS</title>
+<title>Reset Password — NEXLAB</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -87,7 +87,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <a href="index.php" class="brand">
         <span class="brand-mark">S</span>
         <span>
-          <span class="brand-name">SURAS</span>
+          <span class="brand-name">NEXLAB</span>
           <span class="brand-sub">RESOURCE LEDGER</span>
         </span>
       </a>

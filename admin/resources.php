@@ -62,7 +62,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Resources — SURAS Admin</title>
+<title>Manage Resources — NEXLAB Admin</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>

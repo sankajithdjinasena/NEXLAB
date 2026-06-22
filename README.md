@@ -1,4 +1,4 @@
-# SURAS — Smart University Resource Allocation System
+# NEXLAB — Smart University Resource Allocation System
 
 A PHP/MySQL web application for booking and managing shared university resources — computer labs, meeting rooms, multimedia equipment and testing devices — with automated conflict resolution, priority-based allocation, round-robin scheduling and email notifications.
 
@@ -31,15 +31,15 @@ Place the `LabBookingSystem` folder (or whatever you named it) into your web roo
 Open **phpMyAdmin** (http://localhost/phpmyadmin) and:
 
 1. Click **New** in the left sidebar
-2. Create a database named `suras` with collation `utf8mb4_unicode_ci`
-3. Select the `suras` database, click the **Import** tab
-4. Choose `database/suras.sql` and click **Go**
+2. Create a database named `NEXLAB` with collation `utf8mb4_unicode_ci`
+3. Select the `NEXLAB` database, click the **Import** tab
+4. Choose `database/NEXLAB.sql` and click **Go**
 
 Or from the command line:
 
 ```bash
-mysql -u root -p -e "CREATE DATABASE suras CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-mysql -u root -p suras < database/suras.sql
+mysql -u root -p -e "CREATE DATABASE NEXLAB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -u root -p NEXLAB < database/NEXLAB.sql
 ```
 
 ### 3 — Configure the database connection
@@ -48,7 +48,7 @@ Edit `includes/config.php`:
 
 ```php
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'suras');
+define('DB_NAME', 'NEXLAB');
 define('DB_USER', 'root');      // your MySQL username
 define('DB_PASS', '');          // your MySQL password (blank for XAMPP default)
 ```
@@ -67,7 +67,7 @@ Then edit `includes/config.php`:
 ```php
 define('MAIL_HOST',       'smtp.youruniversity.edu');
 define('MAIL_PORT',       587);
-define('MAIL_USERNAME',   'suras@youruniversity.edu');
+define('MAIL_USERNAME',   'NEXLAB@youruniversity.edu');
 define('MAIL_PASSWORD',   'your-smtp-password');
 define('MAIL_ENCRYPTION', 'tls');
 ```
@@ -154,7 +154,7 @@ LabBookingSystem/
 │   └── js/main.js              Mobile nav, password toggle, validation
 │
 └── database/
-    └── suras.sql               Full schema + seed data
+    └── NEXLAB.sql               Full schema + seed data
 ```
 
 ---
@@ -191,13 +191,13 @@ Slot duration and the trigger threshold are configurable in **Admin → Settings
 
 ### 4. Cancellation promotion
 
-When an approved booking is cancelled, SURAS automatically promotes the highest-priority waitlisted booking for that slot and notifies the user.
+When an approved booking is cancelled, NEXLAB automatically promotes the highest-priority waitlisted booking for that slot and notifies the user.
 
 ---
 
 ## Upgrading an existing database
 
-If you already have SURAS running and need to add the new tables:
+If you already have NEXLAB running and need to add the new tables:
 
 ```sql
 -- Password resets table
@@ -228,7 +228,7 @@ INSERT IGNORE INTO settings (setting_key, setting_value, label, description) VAL
 ('rr_slot_duration',    '7200', 'Round-robin slot size (seconds)', ''),
 ('notify_email_enabled','0',    'Email notifications', ''),
 ('notify_from_email',   'noreply@university.edu', 'Notification sender email', ''),
-('notify_from_name',    'SURAS Resource System',  'Notification sender name',  '');
+('notify_from_name',    'NEXLAB Resource System',  'Notification sender name',  '');
 
 -- Update notifications ENUM to include 'submission'
 ALTER TABLE notifications

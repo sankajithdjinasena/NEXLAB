@@ -1,6 +1,6 @@
 <?php
 /**
- * mailer.php — SURAS email notification helper using PHPMailer + Gmail SMTP.
+ * mailer.php — NEXLAB email notification helper using PHPMailer + Gmail SMTP.
  *
  * Requires: composer require phpmailer/phpmailer
  */
@@ -17,7 +17,7 @@ defined('MAIL_PORT')       || define('MAIL_PORT',       587);
 defined('MAIL_USERNAME')   || define('MAIL_USERNAME', $_ENV['MAIL_USERNAME'] ?? '');
 defined('MAIL_PASSWORD')   || define('MAIL_PASSWORD', $_ENV['MAIL_PASSWORD'] ?? '');
 defined('MAIL_FROM')       || define('MAIL_FROM',       'predictrasusl@gmail.com');
-defined('MAIL_FROM_NAME')  || define('MAIL_FROM_NAME',  'SURAS Team');
+defined('MAIL_FROM_NAME')  || define('MAIL_FROM_NAME',  'NEXLAB Team');
 defined('MAIL_ENCRYPTION') || define('MAIL_ENCRYPTION', PHPMailer::ENCRYPTION_STARTTLS);
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -85,7 +85,7 @@ function send_email_notification(
         // echo "<div style='background:#ff000022;border:1px solid red;padding:10px;margin:10px;font-family:monospace;'>"
         //    . "<strong>Mailer Error:</strong> " . htmlspecialchars($mail->ErrorInfo)
         //    . "</div>";
-        error_log('[SURAS Mailer] Failed to send to ' . $toEmail . ' — ' . $mail->ErrorInfo);
+        error_log('[NEXLAB Mailer] Failed to send to ' . $toEmail . ' — ' . $mail->ErrorInfo);
         return false;
     }
 }

@@ -1,14 +1,14 @@
 <?php
 /**
- * SURAS — admin & faculty helper functions
+ * NEXLAB — admin & faculty helper functions
  * User management, resource CRUD, booking approval/rejection, and
  * the analytics queries behind admin/reports.php.
  */
 
-if (defined('SURAS_ADMIN_FUNCTIONS_LOADED')) {
+if (defined('NEXLAB_ADMIN_FUNCTIONS_LOADED')) {
     return;
 }
-define('SURAS_ADMIN_FUNCTIONS_LOADED', true);
+define('NEXLAB_ADMIN_FUNCTIONS_LOADED', true);
 
 require_once __DIR__ . '/functions.php';
 
@@ -236,7 +236,7 @@ function approve_booking_admin(int $bookingId): bool
             'user_id' => $booking['user_id'],
             'booking_id' => $bookingId,
             'type' => 'reminder',
-            'message' => "Your booking has ended. Thank you for using SURAS!",
+            'message' => "Your booking has ended. Thank you for using NEXLAB!",
             'created_at' => $endTime
         ]);
 

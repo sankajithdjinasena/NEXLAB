@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — SURAS public home page
+ * index.php — NEXLAB public home page
  * Smart University Resource Allocation System
  */
 require_once __DIR__ . '/includes/config.php';
@@ -18,8 +18,8 @@ if (is_logged_in()) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SURAS — Smart University Resource Allocation System</title>
-<meta name="description" content="Book labs, rooms and equipment in seconds. SURAS replaces manual sign-up sheets with fair, conflict-free, priority-aware scheduling for your whole campus.">
+<title>NEXLAB — Smart University Resource Allocation System</title>
+<meta name="description" content="Book labs, rooms and equipment in seconds. NEXLAB replaces manual sign-up sheets with fair, conflict-free, priority-aware scheduling for your whole campus.">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -33,7 +33,7 @@ if (is_logged_in()) {
       <span class="eyebrow">Campus resource ledger</span>
       <h1>Every lab, room and<br>device, <em>booked fairly</em>.</h1>
       <p class="hero-lede">
-        SURAS replaces the paper sign-up sheet and the group-chat scramble with
+        NEXLAB replaces the paper sign-up sheet and the group-chat scramble with
         one ledger for the whole university — real-time availability, automatic
         conflict resolution, and a priority system that's actually explainable.
       </p>
@@ -209,7 +209,7 @@ if (is_logged_in()) {
       <div>
         <span class="eyebrow" style="color:#E3B97A">How contested slots are decided</span>
         <h2>Priority isn't a guess — it's a formula.</h2>
-        <p>When two requests land on the same resource, SURAS scores both and
+        <p>When two requests land on the same resource, NEXLAB scores both and
         allocates to the higher score. The loser isn't dropped — it's offered
         an alternative slot or placed on a waitlist that fills itself the
         moment a cancellation comes in.</p>
@@ -278,7 +278,7 @@ if (is_logged_in()) {
     <h2>Stop refreshing the sign-up sheet.</h2>
     <p>Sign in with your university account and book your first resource in under a minute.</p>
     <div class="cta-actions">
-      <a href="login.php" class="btn btn-amber">Sign in to SURAS</a>
+      <a href="login.php" class="btn btn-amber">Sign in to NEXLAB</a>
       <a href="#features" class="btn btn-ghost">Review features</a>
     </div>
   </div>
@@ -292,7 +292,7 @@ if (is_logged_in()) {
         <a href="index.php" class="brand" style="margin-bottom:14px;">
           <span class="brand-mark">S</span>
           <span>
-            <span class="brand-name">SURAS</span>
+            <span class="brand-name">NEXLAB</span>
             <span class="brand-sub">RESOURCE LEDGER</span>
           </span>
         </a>
@@ -323,7 +323,7 @@ if (is_logged_in()) {
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <?php echo date('Y'); ?> SURAS · Team Predictra · CIPHER 2.0 Case Analysis Competition</span>
+      <span>© <?php echo date('Y'); ?> NEXLAB · Team Predictra · CIPHER 2.0 Case Analysis Competition</span>
       <span>Built for academic and educational purposes.</span>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * SURAS — shared helper functions
+ * NEXLAB — shared helper functions
  * Booking conflict detection, priority scoring, notifications,
  * and small view-layer formatting helpers used across pages.
  */
@@ -8,10 +8,10 @@
 // Guard: if this file is ever pulled in twice in the same request
 // (e.g. something used `include` instead of `include_once`), skip
 // the second load instead of fatal-erroring on redeclared functions.
-if (defined('SURAS_FUNCTIONS_LOADED')) {
+if (defined('NEXLAB_FUNCTIONS_LOADED')) {
     return;
 }
-define('SURAS_FUNCTIONS_LOADED', true);
+define('NEXLAB_FUNCTIONS_LOADED', true);
 
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/settings.php';
@@ -648,15 +648,15 @@ function create_notification(int $userId, ?int $bookingId, string $type, string 
 
     // Mirror as email when PHPMailer is configured and enabled.
     $subjects = [
-        'approval'     => '[SURAS] Booking Approved',
-        'rejection'    => '[SURAS] Booking Rejected',
-        'cancellation' => '[SURAS] Booking Cancelled',
-        'waitlist'     => '[SURAS] Added to Waitlist',
-        'alternative'  => '[SURAS] Alternative Slot Available',
-        'reminder'     => '[SURAS] Booking Reminder',
-        'submission'   => '[SURAS] Booking Submitted',
+        'approval'     => '[NEXLAB] Booking Approved',
+        'rejection'    => '[NEXLAB] Booking Rejected',
+        'cancellation' => '[NEXLAB] Booking Cancelled',
+        'waitlist'     => '[NEXLAB] Added to Waitlist',
+        'alternative'  => '[NEXLAB] Alternative Slot Available',
+        'reminder'     => '[NEXLAB] Booking Reminder',
+        'submission'   => '[NEXLAB] Booking Submitted',
     ];
-    $subject = $subjects[$type] ?? '[SURAS] Notification';
+    $subject = $subjects[$type] ?? '[NEXLAB] Notification';
     if (!function_exists('notify_user_by_email')) {
         function notify_user_by_email($userId, $subject, $message) {
             $pdo = get_db_connection();

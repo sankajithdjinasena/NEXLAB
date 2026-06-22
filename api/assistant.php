@@ -1,6 +1,6 @@
 <?php
 /**
- * api/assistant.php — Mock NLP backend for the SURAS AI Assistant.
+ * api/assistant.php — Mock NLP backend for the NEXLAB AI Assistant.
  */
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/auth.php';
@@ -223,7 +223,7 @@ unset($_SESSION['ai_last_action']);
 // 3. Simple conversational fallbacks
 if (strpos($msgLow, 'hello') !== false || strpos($msgLow, 'hi') !== false || strpos($msgLow, 'hey') !== false) {
     echo json_encode([
-        'reply' => 'Hi there! I am your SURAS AI Assistant. I can help you book resources or answer questions about lab rules, waitlists, and priorities!'
+        'reply' => 'Hi there! I am your NEXLAB AI Assistant. I can help you book resources or answer questions about lab rules, waitlists, and priorities!'
     ]);
     exit;
 }
@@ -277,7 +277,7 @@ if (preg_match('/\b(\d+)\s*(people|students|persons|pax)\b/', $msgLow, $matches)
 
 if (!$category && strpos($msgLow, 'book') === false && !$specificRoom && strpos($msgLow, 'available') === false && strpos($msgLow, 'resource') === false) {
     echo json_encode([
-        'reply' => "I didn't quite catch what you're looking for. Could you specify if you need a **lab**, **room**, **projector**, or **device**? You can also ask me general questions about SURAS rules."
+        'reply' => "I didn't quite catch what you're looking for. Could you specify if you need a **lab**, **room**, **projector**, or **device**? You can also ask me general questions about NEXLAB rules."
     ]);
     exit;
 }

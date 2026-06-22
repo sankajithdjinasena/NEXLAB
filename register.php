@@ -1,6 +1,6 @@
 <?php
 /**
- * register.php — SURAS account creation
+ * register.php — NEXLAB account creation
  */
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
@@ -94,8 +94,8 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create an account — SURAS</title>
-<meta name="description" content="Create a SURAS account to start booking university labs, rooms and equipment.">
+<title>Create an account — NEXLAB</title>
+<meta name="description" content="Create a NEXLAB account to start booking university labs, rooms and equipment.">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -107,7 +107,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <a href="index.php" class="brand">
         <span class="brand-mark">S</span>
         <span>
-          <span class="brand-name">SURAS</span>
+          <span class="brand-name">NEXLAB</span>
           <span class="brand-sub">RESOURCE LEDGER</span>
         </span>
       </a>

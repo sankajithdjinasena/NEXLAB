@@ -1,6 +1,6 @@
 <?php
 /**
- * SURAS — Global configuration
+ * NEXLAB — Global configuration
  * Smart University Resource Allocation System
  */
 
@@ -8,7 +8,7 @@ require_once __DIR__ . '/env.php';
 
 // ---- Database credentials -------------------------------------------------
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'suras');
+define('DB_NAME', 'NEXLAB');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
@@ -22,13 +22,13 @@ define('MAIL_PORT',       587);
 define('MAIL_USERNAME', $_ENV['MAIL_USERNAME'] ?? '');
 define('MAIL_PASSWORD', $_ENV['MAIL_PASSWORD'] ?? '');
 define('MAIL_FROM',       'predictrasusl@gmail.com');
-define('MAIL_FROM_NAME',  'SURAS Team');
+define('MAIL_FROM_NAME',  'NEXLAB Team');
 define('MAIL_ENCRYPTION', 'tls');// 'tls' or 'ssl'
 
 // ---- Application settings --------------------------------------------------
-define('APP_NAME', 'SURAS');
+define('APP_NAME', 'NEXLAB');
 define('APP_FULL_NAME', 'Smart University Resource Allocation System');
-define('BASE_URL', '/'); // change to a sub-path if SURAS is not hosted at the web root
+define('BASE_URL', '/'); // change to a sub-path if NEXLAB is not hosted at the web root
 
 // ---- Session & Security Headers ---------------------------------------------
 // Send security headers to protect the application

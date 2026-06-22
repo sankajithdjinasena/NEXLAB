@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="ai-assistant-btn" id="aiBtn">🤖</div>
         <div class="ai-assistant-window" id="aiWindow">
             <div class="ai-header">
-                <div class="ai-header-title"><span>🤖</span> SURAS Assistant</div>
+                <div class="ai-header-title"><span>🤖</span> NEXLAB Assistant</div>
                 <div>
                     <button class="ai-close-btn" id="aiClear" title="Restart Chat" style="margin-right: 8px;">🔄</button>
                     <button class="ai-close-btn" id="aiClose">&times;</button>
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     `;
-    
+
     document.body.insertAdjacentHTML('beforeend', widgetHtml);
 
     const btn = document.getElementById('aiBtn');
@@ -37,19 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
         msgsContainer.innerHTML = '<div class="ai-msg system">Chat cleared. Hi! I\'m your AI Booking Assistant. Try saying: "I need a lab for 4 people tomorrow."</div>';
         fetch('api/assistant.php', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({action: 'clear'})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'clear' })
         });
     });
 
     const addMessage = (text, sender, action = null) => {
         const div = document.createElement('div');
         div.className = `ai-msg ${sender}`;
-        
+
         // Convert basic markdown-like bold to HTML
         let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         div.innerHTML = formattedText;
-        
+
         if (action) {
             const a = document.createElement('a');
             a.className = 'ai-msg-action';
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendMessage = async () => {
         const text = input.value.trim();
         if (!text) return;
-        
+
         addMessage(text, 'user');
         input.value = '';
 
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ message: text })
             });
             const data = await res.json();
-            
+
             if (data.reply) {
                 addMessage(data.reply, 'system', data.action);
             }

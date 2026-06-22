@@ -1,5 +1,5 @@
 /**
- * SURAS — shared front-end behaviour
+ * NEXLAB — shared front-end behaviour
  * Mobile nav toggle, password visibility toggle, and light client-side
  * validation for the login form. No dependencies.
  */

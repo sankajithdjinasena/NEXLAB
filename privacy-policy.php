@@ -1,6 +1,6 @@
 <?php
 /**
- * privacy-policy.php — SURAS Privacy Policy
+ * privacy-policy.php — NEXLAB Privacy Policy
  */
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
@@ -13,8 +13,8 @@ $last_updated = 'June 21, 2026';
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — SURAS</title>
-<meta name="description" content="How SURAS collects, uses, and protects your information.">
+<title>Privacy Policy — NEXLAB</title>
+<meta name="description" content="How NEXLAB collects, uses, and protects your information.">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -24,7 +24,7 @@ $last_updated = 'June 21, 2026';
     <a href="index.php" class="brand">
       <span class="brand-mark">S</span>
       <span>
-        <span class="brand-name">SURAS</span>
+        <span class="brand-name">NEXLAB</span>
         <span class="brand-sub">RESOURCE LEDGER</span>
       </span>
     </a>
@@ -66,7 +66,7 @@ $last_updated = 'June 21, 2026';
 
         <div class="panel" id="intro">
           <p style="margin:0;">
-            This policy explains what information SURAS collects when you book or manage university
+            This policy explains what information NEXLAB collects when you book or manage university
             resources, and how that information is used, shared, and protected.
           </p>
         </div>
@@ -123,7 +123,7 @@ $last_updated = 'June 21, 2026';
           <div class="panel-head"><h2>6. Contact</h2></div>
           <p style="margin:0;">
             Questions about this policy? Email
-            <a class="link-amber" href="mailto:support@suras.edu">support@suras.edu</a>.
+            <a class="link-amber" href="mailto:support@NEXLAB.edu">support@NEXLAB.edu</a>.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ $last_updated = 'June 21, 2026';
 
 <footer class="site-footer">
   <div class="container footer-bottom">
-    <span>&copy; <?php echo date('Y'); ?> SURAS &mdash; Team Predictra</span>
+    <span>&copy; <?php echo date('Y'); ?> NEXLAB &mdash; Team Predictra</span>
     <span>
       <a href="terms.php" class="link-amber">Terms of Service</a>
     </span>

@@ -1,12 +1,12 @@
 <?php
 /**
- * SURAS — Authentication helpers
+ * NEXLAB — Authentication helpers
  */
 
-if (defined('SURAS_AUTH_LOADED')) {
+if (defined('NEXLAB_AUTH_LOADED')) {
     return;
 }
-define('SURAS_AUTH_LOADED', true);
+define('NEXLAB_AUTH_LOADED', true);
 
 /** Escapes a string for safe HTML output. */
 if (!function_exists('e')) {

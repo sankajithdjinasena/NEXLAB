@@ -28,7 +28,7 @@ if ($user['role'] === 'admin') {
     <a href="<?php echo $brandUrl; ?>" class="brand">
       <span class="brand-mark">S</span>
       <span>
-        <span class="brand-name">SURAS</span>
+        <span class="brand-name">NEXLAB</span>
         <span class="brand-sub">RESOURCE LEDGER</span>
       </span>
     </a>

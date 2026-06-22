@@ -53,7 +53,7 @@ $roles = ['all' => 'All roles', 'student' => 'Students', 'project_lead' => 'Proj
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Users — SURAS Admin</title>
+<title>Manage Users — NEXLAB Admin</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>

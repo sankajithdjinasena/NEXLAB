@@ -13,7 +13,7 @@ $isAdmin = $user['role'] === 'admin';
     <a href="<?php echo $isAdmin ? 'dashboard.php' : '../dashboard.php'; ?>" class="brand">
       <span class="brand-mark">S</span>
       <span>
-        <span class="brand-name">SURAS</span>
+        <span class="brand-name">NEXLAB</span>
         <span class="brand-sub"><?php echo $isAdmin ? 'ADMIN CONSOLE' : 'FACULTY REVIEW'; ?></span>
       </span>
     </a>
