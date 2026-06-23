@@ -1752,3 +1752,219 @@ section {
   padding: 18px 20px 24px;
   gap: 16px;
 }
+/* ==========================================================================
+   ADMIN VERTICAL SIDEBAR 
+   ========================================================================== */
+
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  background: var(--paper);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+/* Adjust main content when sidebar is present */
+.admin-sidebar ~ .app-main {
+  margin-left: 260px;
+  min-height: 100vh;
+}
+
+/* Brand Area */
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.sidebar-brand a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.sidebar-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand-text .brand-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+.sidebar-brand-text .brand-sub {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 1px;
+}
+
+/* Nav Links */
+.sidebar-nav {
+  flex: 1;
+  padding: 20px 12px;
+}
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.sidebar-nav a svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+}
+.sidebar-nav a:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+.sidebar-nav a:hover svg {
+  opacity: 1;
+}
+.sidebar-nav a.is-active {
+  background: #f1f5f9;
+  color: var(--ink);
+  font-weight: 600;
+}
+.sidebar-nav a.is-active svg {
+  opacity: 1;
+  color: var(--amber);
+}
+
+/* Footer / User Profile */
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-user .user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+.sidebar-user .user-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-user .user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-user .user-role {
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+.sidebar-actions {
+  display: flex;
+  gap: 8px;
+}
+.sidebar-actions a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.sidebar-actions a:hover {
+  background: #e2e8f0;
+  color: var(--ink);
+}
+.sidebar-actions a svg {
+  width: 16px;
+  height: 16px;
+}
+.sidebar-actions .logout-btn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* Mobile Toggle */
+.mobile-sidebar-toggle {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 110;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-sidebar-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+  }
+  .admin-sidebar.is-open {
+    transform: translateX(0);
+  }
+  .admin-sidebar ~ .app-main {
+    margin-left: 0;
+  }
+  .mobile-sidebar-toggle {
+    display: flex;
+  }
+}
