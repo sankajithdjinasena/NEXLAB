@@ -1,1 +1,5 @@
-includes/env.php
+﻿includes/env.php
+logincredential.txt
+test_*.php
+scratch/
+*.log

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 22, 2026 at 08:30 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jun 23, 2026 at 05:20 AM
+-- Server version: 8.3.0
+-- PHP Version: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,19 +27,23 @@ SET time_zone = "+00:00";
 -- Table structure for table `bookings`
 --
 
-CREATE TABLE `bookings` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `resource_id` int(10) UNSIGNED NOT NULL,
-  `purpose` varchar(255) NOT NULL,
+DROP TABLE IF EXISTS `bookings`;
+CREATE TABLE IF NOT EXISTS `bookings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int UNSIGNED NOT NULL,
+  `resource_id` int UNSIGNED NOT NULL,
+  `purpose` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
-  `urgency` tinyint(3) UNSIGNED NOT NULL DEFAULT 1,
-  `team_size` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `urgency` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `team_size` int UNSIGNED NOT NULL DEFAULT '1',
   `priority_score` decimal(5,2) DEFAULT NULL,
-  `status` enum('pending','approved','rejected','waitlist','completed','cancelled') NOT NULL DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` enum('pending','approved','rejected','waitlist','completed','cancelled') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_bookings_user` (`user_id`),
+  KEY `idx_bookings_resource_time` (`resource_id`,`start_time`,`end_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bookings`
@@ -61,7 +65,12 @@ INSERT INTO `bookings` (`id`, `user_id`, `resource_id`, `purpose`, `start_time`,
 (38, 6, 8, 'nb (Admin Override)', '2027-10-26 10:00:00', '2027-10-27 10:00:00', 3, 1, 2.70, 'approved', '2026-06-22 12:34:22'),
 (41, 6, 6, 'Movie (Admin Override)', '2026-08-20 10:00:00', '2026-08-21 12:00:00', 3, 1, 2.70, 'approved', '2026-06-22 13:38:07'),
 (42, 6, 4, 'Work', '2026-06-25 02:00:00', '2026-06-25 04:00:00', 5, 12, 7.00, 'approved', '2026-06-22 13:41:20'),
-(43, 6, 4, 'Internal', '2026-06-25 14:00:00', '2026-06-25 16:00:00', 5, 12, 7.00, 'rejected', '2026-06-22 13:42:54');
+(43, 6, 4, 'Internal', '2026-06-25 14:00:00', '2026-06-25 16:00:00', 5, 12, 7.00, 'rejected', '2026-06-22 13:42:54'),
+(44, 3, 10, 'Personal', '2026-08-13 21:00:00', '2026-08-14 02:00:00', 3, 1, 4.30, 'approved', '2026-06-23 04:02:35'),
+(45, 3, 6, 'Team Use', '2026-06-25 10:00:00', '2026-06-25 12:00:00', 3, 1, 3.90, 'approved', '2026-06-23 04:05:18'),
+(46, 3, 8, 'own use', '2026-06-26 10:00:00', '2026-06-26 12:00:00', 2, 1, 2.70, 'rejected', '2026-06-23 04:09:55'),
+(47, 1, 3, 'Meeting', '2026-06-30 08:00:00', '2026-06-30 12:00:00', 4, 1, 5.10, 'approved', '2026-06-23 05:17:11'),
+(48, 3, 7, 'Work', '2026-06-23 08:00:00', '2026-06-23 12:00:00', 4, 1, 4.30, 'approved', '2026-06-23 05:18:01');
 
 -- --------------------------------------------------------
 
@@ -69,10 +78,13 @@ INSERT INTO `bookings` (`id`, `user_id`, `resource_id`, `purpose`, `start_time`,
 -- Table structure for table `departments`
 --
 
-CREATE TABLE `departments` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `departments`;
+CREATE TABLE IF NOT EXISTS `departments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `departments`
@@ -90,15 +102,19 @@ INSERT INTO `departments` (`id`, `name`) VALUES
 -- Table structure for table `notifications`
 --
 
-CREATE TABLE `notifications` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `booking_id` int(10) UNSIGNED DEFAULT NULL,
-  `type` enum('approval','rejection','cancellation','reminder','waitlist','alternative') NOT NULL,
-  `message` varchar(500) NOT NULL,
-  `is_read` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int UNSIGNED NOT NULL,
+  `booking_id` int UNSIGNED DEFAULT NULL,
+  `type` enum('approval','rejection','cancellation','reminder','waitlist','alternative') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_notifications_user` (`user_id`),
+  KEY `fk_notifications_booking` (`booking_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `notifications`
@@ -107,16 +123,16 @@ CREATE TABLE `notifications` (
 INSERT INTO `notifications` (`id`, `user_id`, `booking_id`, `type`, `message`, `is_read`, `created_at`) VALUES
 (22, 4, 12, 'approval', 'Your booking request has been approved automatically.', 1, '2026-06-21 13:58:49'),
 (23, 5, 13, 'approval', 'Your booking request has been approved automatically.', 0, '2026-06-21 13:58:49'),
-(24, 5, 13, 'alternative', 'Your booking for Conference Room A on Jun 25 was demoted to the waitlist because a higher priority request was approved. Alternative slot available: 8:00 AM–10:00 AM.', 0, '2026-06-21 13:58:49'),
+(24, 5, 13, 'alternative', 'Your booking for Conference Room A on Jun 25 was demoted to the waitlist because a higher priority request was approved. Alternative slot available: 8:00 AM???10:00 AM.', 0, '2026-06-21 13:58:49'),
 (25, 3, 14, 'approval', 'Your booking request overrode an existing lower-priority booking.', 1, '2026-06-21 13:58:49'),
-(26, 4, 15, 'alternative', 'Your booking request conflicted with a higher-priority request and has been waitlisted. Alternative slot: Jun 25, 8:00 AM–9:00 AM.', 1, '2026-06-21 13:58:49'),
+(26, 4, 15, 'alternative', 'Your booking request conflicted with a higher-priority request and has been waitlisted. Alternative slot: Jun 25, 8:00 AM???9:00 AM.', 1, '2026-06-21 13:58:49'),
 (27, 4, NULL, 'approval', 'Your booking request has been approved automatically.', 1, '2026-06-21 13:58:49'),
-(28, 4, NULL, 'alternative', 'Your booking for Computer Lab 204 conflicted with another request. It was split fairly using Round Robin. Approved slots: 12:00 PM–2:00 PM.', 1, '2026-06-21 13:58:49'),
-(29, 5, NULL, 'alternative', 'Your booking for Computer Lab 204 was split fairly using Round Robin. Approved slots: 10:00 AM–12:00 PM.', 0, '2026-06-21 13:58:49'),
+(28, 4, NULL, 'alternative', 'Your booking for Computer Lab 204 conflicted with another request. It was split fairly using Round Robin. Approved slots: 12:00 PM???2:00 PM.', 1, '2026-06-21 13:58:49'),
+(29, 5, NULL, 'alternative', 'Your booking for Computer Lab 204 was split fairly using Round Robin. Approved slots: 10:00 AM???12:00 PM.', 0, '2026-06-21 13:58:49'),
 (30, 5, 13, 'rejection', 'Your booking request was rejected.', 0, '2026-06-21 14:02:37'),
 (31, 4, 15, 'rejection', 'Your booking request was rejected.', 1, '2026-06-21 14:02:46'),
-(32, 4, NULL, 'alternative', 'Your booking for Computer Lab 204 conflicted with another request. It was split fairly using Round Robin. Approved slots: 9:00 AM–11:00 AM.', 1, '2026-06-21 17:37:11'),
-(33, 3, NULL, 'alternative', 'Your booking for Computer Lab 204 was split fairly using Round Robin. Approved slots: 7:00 AM–9:00 AM, 11:00 AM–12:00 PM, 1:04 AM–7:00 AM, 12:00 PM–4:03 PM.', 1, '2026-06-21 17:37:11'),
+(32, 4, NULL, 'alternative', 'Your booking for Computer Lab 204 conflicted with another request. It was split fairly using Round Robin. Approved slots: 9:00 AM???11:00 AM.', 1, '2026-06-21 17:37:11'),
+(33, 3, NULL, 'alternative', 'Your booking for Computer Lab 204 was split fairly using Round Robin. Approved slots: 7:00 AM???9:00 AM, 11:00 AM???12:00 PM, 1:04 AM???7:00 AM, 12:00 PM???4:03 PM.', 1, '2026-06-21 17:37:11'),
 (34, 6, NULL, 'approval', 'Your booking request has been approved automatically.', 1, '2026-06-22 09:33:17'),
 (35, 6, 26, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-22 09:56:37'),
 (36, 6, 26, 'approval', 'Your booking request has been approved.', 1, '2026-06-22 09:56:57'),
@@ -128,7 +144,7 @@ INSERT INTO `notifications` (`id`, `user_id`, `booking_id`, `type`, `message`, `
 (42, 6, 27, 'reminder', 'Your booking has ended. Thank you for using SURAS!', 1, '2026-12-06 20:30:00'),
 (49, 4, 34, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-22 10:34:59'),
 (50, 6, 35, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-22 10:37:11'),
-(51, 4, 36, 'alternative', 'Your booking request conflicted with a higher-priority request and has been waitlisted. Alternative slot: Dec 12, 8:00 AM–10:00 AM.', 1, '2026-06-22 10:40:50'),
+(51, 4, 36, 'alternative', 'Your booking request conflicted with a higher-priority request and has been waitlisted. Alternative slot: Dec 12, 8:00 AM???10:00 AM.', 1, '2026-06-22 10:40:50'),
 (52, 6, 37, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-22 10:53:28'),
 (53, 6, 37, 'approval', 'Your booking request has been approved.', 1, '2026-06-22 11:00:53'),
 (54, 6, 37, 'reminder', 'Reminder: Your booking starts in 1 hour.', 1, '2026-12-27 17:30:00'),
@@ -148,12 +164,21 @@ INSERT INTO `notifications` (`id`, `user_id`, `booking_id`, `type`, `message`, `
 (68, 4, 36, 'reminder', 'Your booking has ended. Thank you for using SURAS!', 1, '2026-12-12 06:30:00'),
 (69, 6, 41, 'approval', 'Your resource booking request has been approved by administrator override.', 1, '2026-06-22 13:38:07'),
 (70, 6, 42, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-22 13:41:20'),
-(71, 6, 43, 'alternative', 'Your booking request conflicted with a higher-priority request and has been waitlisted. Alternative slot: Jun 25, 8:00 AM–10:00 AM.', 1, '2026-06-22 13:42:54'),
+(71, 6, 43, 'alternative', 'Your booking request conflicted with a higher-priority request and has been waitlisted. Alternative slot: Jun 25, 8:00 AM???10:00 AM.', 1, '2026-06-22 13:42:54'),
 (72, 6, 42, 'approval', 'Your booking request has been approved.', 1, '2026-06-22 13:43:34'),
 (73, 6, 42, 'reminder', 'Reminder: Your booking starts in 1 hour.', 1, '2026-06-24 19:30:00'),
 (74, 6, 42, 'reminder', 'Your booking has ended. Thank you for using SURAS!', 1, '2026-06-24 22:30:00'),
 (75, 6, 43, 'rejection', 'Your booking request was rejected.', 1, '2026-06-22 13:44:31'),
-(76, 6, 26, 'cancellation', 'Your booking has been cancelled.', 1, '2026-06-22 13:45:08');
+(76, 6, 26, 'cancellation', 'Your booking has been cancelled.', 1, '2026-06-22 13:45:08'),
+(77, 3, 44, 'approval', 'Your resource booking request has been approved by administrator override.', 1, '2026-06-23 04:02:35'),
+(78, 3, 45, 'approval', 'Your resource booking request has been approved by administrator override.', 1, '2026-06-23 04:05:18'),
+(79, 3, 46, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-23 04:09:55'),
+(80, 3, 46, 'rejection', 'Your booking request was rejected.', 1, '2026-06-23 04:10:44'),
+(81, 1, 47, 'approval', 'Your resource booking request has been approved by administrator override.', 1, '2026-06-23 05:17:11'),
+(82, 3, 48, '', 'Your booking request has been submitted and is pending faculty/admin approval.', 1, '2026-06-23 05:18:01'),
+(83, 3, 48, 'approval', 'Your booking request has been approved.', 1, '2026-06-23 05:18:30'),
+(84, 3, 48, 'reminder', 'Reminder: Your booking starts in 1 hour.', 1, '2026-06-23 01:30:00'),
+(85, 3, 48, 'reminder', 'Your booking has ended. Thank you for using NEXLAB!', 1, '2026-06-23 06:30:00');
 
 -- --------------------------------------------------------
 
@@ -161,16 +186,18 @@ INSERT INTO `notifications` (`id`, `user_id`, `booking_id`, `type`, `message`, `
 -- Table structure for table `resources`
 --
 
-CREATE TABLE `resources` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `category` enum('lab','room','multimedia','device') NOT NULL,
-  `location` varchar(150) DEFAULT NULL,
-  `capacity` int(10) UNSIGNED DEFAULT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `status` enum('available','maintenance','retired') NOT NULL DEFAULT 'available',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `resources`;
+CREATE TABLE IF NOT EXISTS `resources` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` enum('lab','room','multimedia','device') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `capacity` int UNSIGNED DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('available','maintenance','retired') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'available',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `resources`
@@ -194,7 +221,8 @@ INSERT INTO `resources` (`id`, `name`, `category`, `location`, `capacity`, `desc
 -- Table structure for table `settings`
 --
 
-CREATE TABLE `settings` (
+DROP TABLE IF EXISTS `settings`;
+CREATE TABLE IF NOT EXISTS `settings` (
   `setting_key` varchar(80) NOT NULL,
   `setting_value` varchar(255) NOT NULL,
   `label` varchar(120) NOT NULL,
@@ -223,17 +251,18 @@ INSERT INTO `settings` (`setting_key`, `setting_value`, `label`, `description`) 
 -- Table structure for table `support_messages`
 --
 
-CREATE TABLE `support_messages` (
-  `id` int(11) NOT NULL,
-  `sender_id` int(11) NOT NULL,
-  `receiver_id` int(11) DEFAULT NULL,
+DROP TABLE IF EXISTS `support_messages`;
+CREATE TABLE IF NOT EXISTS `support_messages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sender_id` int NOT NULL,
+  `receiver_id` int DEFAULT NULL,
   `message` text NOT NULL,
   `is_read` tinyint(1) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_support_sender` (`sender_id`),
   KEY `fk_support_receiver` (`receiver_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `support_messages`
@@ -251,7 +280,11 @@ INSERT INTO `support_messages` (`id`, `sender_id`, `receiver_id`, `message`, `is
 (24, 1, 5, 'hi', 0, '2026-06-22 19:03:25'),
 (25, 1, 5, 'hi', 0, '2026-06-22 19:05:35'),
 (26, 1, 4, 'ok', 0, '2026-06-22 19:05:47'),
-(27, 6, 1, 'ok sir', 0, '2026-06-22 19:06:10');
+(27, 6, 1, 'ok sir', 0, '2026-06-22 19:06:10'),
+(28, 3, 1, 'hi', 0, '2026-06-23 09:25:04'),
+(29, 1, 4, 'hi', 0, '2026-06-23 09:27:09'),
+(30, 1, 6, 'hola amigo', 0, '2026-06-23 09:27:41'),
+(31, 5, 1, 'Test message from debug script', 0, '2026-06-23 09:27:43');
 
 -- --------------------------------------------------------
 
@@ -259,32 +292,38 @@ INSERT INTO `support_messages` (`id`, `sender_id`, `receiver_id`, `message`, `is
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `full_name` varchar(120) NOT NULL,
-  `email` varchar(190) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `role` enum('student','faculty','project_lead','admin') NOT NULL DEFAULT 'student',
-  `university_id` varchar(50) DEFAULT NULL,
-  `department` varchar(120) DEFAULT NULL,
-  `status` enum('active','suspended') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('student','faculty','project_lead','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'student',
+  `university_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `department` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('active','suspended') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_flagged` tinyint(1) NOT NULL DEFAULT '0',
+  `flag_reason` text COLLATE utf8mb4_unicode_ci,
+  `flag_date` datetime DEFAULT NULL,
+  `flag_count` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `full_name`, `email`, `password_hash`, `role`, `university_id`, `department`, `status`, `created_at`) VALUES
-(1, 'Harol Maxilan', 'harol.admin@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'admin', NULL, 'Resource Office', 'active', '2026-06-20 04:51:18'),
-(2, 'Dr. A. Perera', 'a.perera@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'project_lead', NULL, 'Computer Science', 'active', '2026-06-20 04:51:18'),
-(3, 'Sankajith Jinasena', 'sankajith@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'project_lead', NULL, 'Computer Science', 'active', '2026-06-20 04:51:18'),
-(4, 'Mathurya Muralimohan', 'mathurya@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'student', NULL, 'Computer Science', 'active', '2026-06-20 04:51:18'),
-(5, 'Sanodya Jinadasa', 'sanodya@university.edu', '$2y$10$s442GQ/YWPiwFfV8vrpQCOJ0.2m9034OiP60OGP5lVQjMJ1MxrYk.', 'student', NULL, 'Data Science', 'active', '2026-06-21 12:16:56'),
-(6, 'TestUser01', 'user01@university.edu', '$2y$10$iLPtNHXJTQ0NGHbu2vG4Y.nhO5H5.aQGd.9y1RybAGIbW0h3phx/y', 'student', '22CDS0459', 'Computer Science', 'active', '2026-06-22 09:24:27'),
-(7, 'Prof. S. Bandara', 's.bandara@university.edu', '$2y$10$gU7byn8ooJ88tbtMMp7aaO6i31uq5IiEjmqUBaAumB1Dk/mfjREya', 'faculty', NULL, NULL, 'active', '2026-06-22 11:25:28'),
-(8, 'Dr. K. Silva', 'k.silva@university.edu', '$2y$10$5RhNHH8N0A/q/QBeaCuIpOYm.sjQQ6Soqznmv6cwxWPWkkd2cuu8q', 'faculty', NULL, NULL, 'active', '2026-06-22 11:25:28'),
-(9, 'Mr. R. Fernando (Lead)', 'r.fernando@university.edu', '$2y$10$9ps6PlhoWII81tSZt1TaoeZFhx2A3BC0iAYYDp7Nh/694f3PHxrFO', 'project_lead', NULL, NULL, 'active', '2026-06-22 11:25:28');
+INSERT INTO `users` (`id`, `full_name`, `email`, `password_hash`, `role`, `university_id`, `department`, `status`, `created_at`, `is_flagged`, `flag_reason`, `flag_date`, `flag_count`) VALUES
+(1, 'Harol Maxilan', 'harol.admin@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'admin', NULL, 'Resource Office', 'active', '2026-06-20 04:51:18', 0, NULL, NULL, 0),
+(2, 'Dr. A. Perera', 'a.perera@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'project_lead', NULL, 'Computer Science', 'active', '2026-06-20 04:51:18', 0, NULL, NULL, 0),
+(3, 'Sankajith Jinasena', 'sankajith@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'project_lead', NULL, 'Computer Science', 'active', '2026-06-20 04:51:18', 0, NULL, NULL, 0),
+(4, 'Mathurya Muralimohan', 'mathurya@university.edu', '$2b$12$83m9pMyfi7ubl7ZiBlrZL.umhpn3aWl/hbOFfKP.LFa7iUXy9VJtW', 'student', NULL, 'Computer Science', 'active', '2026-06-20 04:51:18', 0, NULL, NULL, 0),
+(5, 'Sanodya Jinadasa', 'sanodya@university.edu', '$2y$10$s442GQ/YWPiwFfV8vrpQCOJ0.2m9034OiP60OGP5lVQjMJ1MxrYk.', 'student', NULL, 'Data Science', 'active', '2026-06-21 12:16:56', 0, NULL, NULL, 0),
+(6, 'TestUser01', 'user01@university.edu', '$2y$10$iLPtNHXJTQ0NGHbu2vG4Y.nhO5H5.aQGd.9y1RybAGIbW0h3phx/y', 'student', '22CDS0459', 'Computer Science', 'active', '2026-06-22 09:24:27', 0, NULL, NULL, 0),
+(7, 'Prof. S. Bandara', 's.bandara@university.edu', '$2y$10$gU7byn8ooJ88tbtMMp7aaO6i31uq5IiEjmqUBaAumB1Dk/mfjREya', 'faculty', NULL, NULL, 'active', '2026-06-22 11:25:28', 0, NULL, NULL, 0),
+(8, 'Dr. K. Silva', 'k.silva@university.edu', '$2y$10$5RhNHH8N0A/q/QBeaCuIpOYm.sjQQ6Soqznmv6cwxWPWkkd2cuu8q', 'faculty', NULL, NULL, 'active', '2026-06-22 11:25:28', 0, NULL, NULL, 0),
+(9, 'Mr. R. Fernando (Lead)', 'r.fernando@university.edu', '$2y$10$9ps6PlhoWII81tSZt1TaoeZFhx2A3BC0iAYYDp7Nh/694f3PHxrFO', 'project_lead', NULL, NULL, 'active', '2026-06-22 11:25:28', 0, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -292,151 +331,17 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password_hash`, `role`, `unive
 -- Table structure for table `waitlist`
 --
 
-CREATE TABLE `waitlist` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `booking_id` int(10) UNSIGNED NOT NULL,
-  `resource_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `waitlist`;
+CREATE TABLE IF NOT EXISTS `waitlist` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `booking_id` int UNSIGNED NOT NULL,
+  `resource_id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_bookings_user` (`user_id`),
-  ADD KEY `idx_bookings_resource_time` (`resource_id`,`start_time`,`end_time`);
-
---
--- Indexes for table `departments`
---
-ALTER TABLE `departments`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Indexes for table `notifications`
---
-ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_notifications_user` (`user_id`),
-  ADD KEY `fk_notifications_booking` (`booking_id`);
-
---
--- Indexes for table `resources`
---
-ALTER TABLE `resources`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `settings`
---
-ALTER TABLE `settings`
-  ADD PRIMARY KEY (`setting_key`);
-
---
--- Indexes for table `support_messages`
---
-ALTER TABLE `support_messages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_support_sender` (`sender_id`),
-  ADD KEY `fk_support_receiver` (`receiver_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `university_id` (`university_id`);
-
---
--- Indexes for table `waitlist`
---
-ALTER TABLE `waitlist`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_waitlist_booking` (`booking_id`),
-  ADD KEY `fk_waitlist_resource` (`resource_id`),
-  ADD KEY `fk_waitlist_user` (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `bookings`
---
-ALTER TABLE `bookings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- AUTO_INCREMENT for table `departments`
---
-ALTER TABLE `departments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `notifications`
---
-ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
-
---
--- AUTO_INCREMENT for table `resources`
---
-ALTER TABLE `resources`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `support_messages`
---
-ALTER TABLE `support_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
-
---
--- AUTO_INCREMENT for table `waitlist`
---
-ALTER TABLE `waitlist`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `fk_bookings_resource` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_bookings_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `notifications`
---
-ALTER TABLE `notifications`
-  ADD CONSTRAINT `fk_notifications_booking` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_notifications_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `waitlist`
---
-ALTER TABLE `waitlist`
-  ADD CONSTRAINT `fk_waitlist_booking` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_waitlist_resource` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_waitlist_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
