@@ -175,7 +175,7 @@ $avgUtil = count($utilSummary) > 0
   <div class="page-head">
     <div>
       <h1>Intelligence Dashboard</h1>
-      <p>Predictive demand forecasting and anomaly detection for NEXLAB resources.</p>
+      <p>Predictive demand forecasting and behavioral activity flags for NEXLAB resources.</p>
     </div>
     <a href="dashboard.php" class="btn btn-ghost">Back to Overview</a>
   </div>
@@ -197,7 +197,7 @@ $avgUtil = count($utilSummary) > 0
       </div>
       <div class="stat-strip-cell">
         <div class="stat-strip-num" style="color:#c2410c;"><?= count($anomalies) ?></div>
-        <div class="stat-strip-lbl">Anomalous Users</div>
+        <div class="stat-strip-lbl">Flagged Users</div>
       </div>
       <div class="stat-strip-cell">
         <div class="stat-strip-num" style="color:#0369a1;">
@@ -280,14 +280,14 @@ $avgUtil = count($utilSummary) > 0
     <?php endif; ?>
   </div>
 
-  <!-- ── ANOMALY DETECTION ──────────────────────────────────── -->
-  <div class="intel-section">
+  <!-- ── BEHAVIORAL ACTIVITY FLAGS ──────────────────────────────────── -->
+  <div class="intel-section" id="anomalies">
     <div class="section-header">
       <div class="section-header-left">
-        <h2>Anomaly Detection</h2>
-        <p>Users with statistically unusual booking behaviour detected in the last 7&#8211;30 days. Checks: high frequency, urgency manipulation, resource hoarding, rapid-fire submissions.</p>
+        <h2>Behavioral Activity & Flags</h2>
+        <p>Users exhibiting notable booking behaviour in the last 7&#8211;30 days. Checks: high volume, urgency usage, resource dependency, and batch-booking sessions.</p>
       </div>
-      <span class="section-tag tag-anomaly">Anomalies</span>
+      <span class="section-tag tag-anomaly">Activity Flags</span>
     </div>
 
     <?php if (empty($anomalies)): ?>
@@ -295,7 +295,7 @@ $avgUtil = count($utilSummary) > 0
         <div class="nd-icon">
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#aaa" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
         </div>
-        <p>No anomalies detected. All users are within normal booking patterns.</p>
+        <p>No unusual activity detected. All users are within standard booking patterns.</p>
       </div>
     <?php else: ?>
       <?php foreach ($anomalies as $uid => $entry):
