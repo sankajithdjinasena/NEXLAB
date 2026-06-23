@@ -192,7 +192,7 @@ function detect_anomalies(int $freq_threshold = 40, int $burst_threshold = 40): 
     $anomalies = [];
 
     // 1. HIGH FREQUENCY: >5 bookings in last 7 days (any status)
-    $stmt = $pdo->query("
+    $stmt = $pdo->prepare("
         SELECT 
             u.id, u.full_name, u.email, u.role, u.department,
             u.is_flagged, u.flag_reason, u.flag_count, u.status as account_status,
@@ -279,7 +279,7 @@ function detect_anomalies(int $freq_threshold = 40, int $burst_threshold = 40): 
     }
 
     // 4. RAPID FIRE: Multiple bookings created within 10 minutes
-    $stmt = $pdo->query("
+    $stmt = $pdo->prepare("
         SELECT 
             u.id, u.full_name, u.email, u.role, u.department,
             u.is_flagged, u.flag_reason, u.flag_count, u.status as account_status,
