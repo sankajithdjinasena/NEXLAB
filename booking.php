@@ -106,6 +106,11 @@ $csrf_token = $_SESSION['csrf_token'];
       </div>
     <?php endif; ?>
 
+    <div class="banner banner-warn" style="margin-bottom: 24px;">
+      <span>⚠</span>
+      <span><strong>Mandatory Transition Period:</strong> All bookings include a +/- 10 minute transition period for room maintenance and clearing. Please factor this into your planned usage time.</span>
+    </div>
+
     <div class="booking-layout">
 
       <div class="panel">

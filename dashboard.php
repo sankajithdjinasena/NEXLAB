@@ -49,10 +49,13 @@ $justRegistered = isset($_GET['welcome']);
         <span><?php echo $bs === 'waitlist' ? '⏳' : ($bs === 'pending' ? '🕐' : '✓'); ?></span>
         <span>
           <?php
-            if ($bs === 'approved')       echo '✅ Your booking was approved instantly (admin override).';
-            elseif ($bs === 'pending')    echo '🕐 Your booking request has been submitted and is awaiting admin/faculty approval. You will be notified once it is reviewed.';
-            elseif ($bs === 'waitlist')   echo '⏳ Your booking conflicted with a higher-priority request and was added to the waitlist — check Notifications for an alternative slot.';
+            if ($bs === 'approved')       echo 'Your booking was approved instantly (admin override).';
+            elseif ($bs === 'pending')    echo 'Your booking request has been submitted and is awaiting admin/faculty approval. You will be notified once it is reviewed.';
+            elseif ($bs === 'waitlist')   echo 'Your booking conflicted with a higher-priority request and was added to the waitlist — check Notifications for an alternative slot.';
             else                          echo 'Your booking was processed — check My Bookings for details.';
+            
+            // Add the maintenance buffer notice
+            echo ' <br><strong style="color:var(--ink);display:inline-block;margin-top:6px;">⚠️ Please remember: All bookings include a mandatory +/- 10 min transition period for maintenance and room clearing.</strong>';
           ?>
         </span>
       </div>
