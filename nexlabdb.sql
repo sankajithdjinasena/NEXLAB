@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 23, 2026 at 05:20 AM
+-- Generation Time: Jun 23, 2026 at 04:13 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `label` varchar(120) NOT NULL,
   `description` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`setting_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `settings`
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `support_messages` (
   PRIMARY KEY (`id`),
   KEY `fk_support_sender` (`sender_id`),
   KEY `fk_support_receiver` (`receiver_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `support_messages`
