@@ -21,6 +21,7 @@ if (is_logged_in()) {
 <title>NEXLAB — Smart University Resource Allocation System</title>
 <meta name="description" content="Book labs, rooms and equipment in seconds. NEXLAB replaces manual sign-up sheets with fair, conflict-free, priority-aware scheduling for your whole campus.">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
 

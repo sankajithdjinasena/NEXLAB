@@ -51,6 +51,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <title>Sign in — NEXLAB</title>
 <meta name="description" content="Sign in to the Smart University Resource Allocation System to book labs, rooms, and equipment.">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
 

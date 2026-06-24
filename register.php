@@ -97,6 +97,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <title>Create an account — NEXLAB</title>
 <meta name="description" content="Create a NEXLAB account to start booking university labs, rooms and equipment.">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
 

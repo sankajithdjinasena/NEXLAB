@@ -16,6 +16,7 @@ $last_updated = 'June 21, 2026';
 <title>Privacy Policy — NEXLAB</title>
 <meta name="description" content="How NEXLAB collects, uses, and protects your information.">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
 

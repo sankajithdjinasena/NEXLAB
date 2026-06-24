@@ -16,6 +16,7 @@ $last_updated = 'June 21, 2026';
 <title>Terms of Service — NEXLAB</title>
 <meta name="description" content="The terms that govern your use of NEXLAB.">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
 

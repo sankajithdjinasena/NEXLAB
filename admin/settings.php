@@ -67,6 +67,7 @@ function seconds_to_label(int $s): string {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Settings — NEXLAB Admin</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
 <style>
 .settings-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .weight-track{ display: flex; align-items: center; gap: 14px; }

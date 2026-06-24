@@ -68,6 +68,7 @@ $avgUtil = count($utilSummary) > 0
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Intelligence Dashboard — NEXLAB</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
 <style>
 /* ── Layout ── */
 .intel-section { background:#fff; border-radius:10px; box-shadow:0 1px 8px rgba(0,0,0,.06); margin-bottom:24px; overflow:hidden; }

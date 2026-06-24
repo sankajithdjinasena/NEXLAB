@@ -28,6 +28,7 @@ $justRegistered = isset($_GET['welcome']);
 <title>Dashboard — NEXLAB</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/assistant.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
 

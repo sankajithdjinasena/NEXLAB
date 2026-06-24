@@ -60,6 +60,7 @@ if ($selectedAdminId && $activeAdmin) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Support Desk — NEXLAB</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 <style>
 .support-container { display: flex; gap: 0; height: 600px; max-height: 80vh; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px;}
 .support-sidebar { width: 280px; background: #f0f2f5; border-right: 1px solid #d1d7db; overflow-y: auto; flex-shrink: 0; }
